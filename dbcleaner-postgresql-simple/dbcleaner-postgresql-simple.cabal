@@ -1,0 +1,29 @@
+name:           dbcleaner-postgresql-simple
+version:        0.1.0
+-- synopsis:       
+-- description:    
+license:        MIT
+license-file:   LICENSE
+author:         Sebastián Estrella
+maintainer:     sebas007estrella@gmail.com
+category:       Database
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:     Database.DBCleaner.PostgreSQLSimple
+                 ,     Database.DBCleaner.PostgreSQLSimple.Types
+  build-depends:       base >=4.7 && <4.8, dbcleaner-core, postgresql-simple, bytestring
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+
+test-suite spec
+  type:                exitcode-stdio-1.0
+  build-depends:       base
+               , dbcleaner-core
+               , dbcleaner-postgresql-simple
+               , hspec
+               , postgresql-simple
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  default-language:    Haskell2010

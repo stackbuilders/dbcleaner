@@ -1,12 +1,8 @@
 module Database.DBCleaner where
 
-import Database.DBCleaner.Types
+import Control.Exception (bracket)
 
-withConnection :: Connection a => a -> Strategy -> (a -> IO b) -> IO b
-withConnection = undefined
+import Database.DBCleaner.Types (GenericConnection(..), Strategy)
 
-beginTransaction :: Connection a => a -> IO a
-beginTransaction = undefined
-
-rollbackTransaction :: Connection a => a -> IO ()
-rollbackTransaction = undefined
+withConnection :: GenericConnection a => a -> Strategy -> (a -> IO b) -> IO b
+withConnection c s = bracket (begin c s >> return c) (`rollback` s)
