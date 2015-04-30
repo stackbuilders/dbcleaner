@@ -18,10 +18,16 @@ install:
   - (cd dbcleaner-postgresql-simple && cabal sandbox init)
   - (cd dbcleaner-postgresql-simple && cabal sandbox add-source ../dbcleaner-core)
   - (cd dbcleaner-postgresql-simple && travis_retry cabal install --only-dependencies --enable-tests)
+  - (cd dbcleaner-hdbc && cabal sandbox init)
+  - (cd dbcleaner-hdbc && cabal sandbox add-source ../dbcleaner-core)
+  - (cd dbcleaner-hdbc && travis_retry cabal install --only-dependencies --enable-tests)
 
 before_script:
   - createdb dbcleaner
   - psql dbcleaner < dbcleaner-postgresql-simple/test/schema.sql
+  - createdb dbcleaner-hdbc
+  - psql dbcleaner-hdbc < dbcleaner-hdbc/test/schema-postgresql.sql
+  - sqlite3 dbcleaner-hdbc/dbcleaner-hdbc.db < dbcleaner-hdbc/test/schema-sqlite3.sql
 
 script:
   - (cd dbcleaner-core && cabal configure --enable-tests)
@@ -30,3 +36,6 @@ script:
   - (cd dbcleaner-postgresql-simple && cabal configure --enable-tests)
   - (cd dbcleaner-postgresql-simple && cabal build)
   - (cd dbcleaner-postgresql-simple && cabal test)
+  - (cd dbcleaner-hdbc && cabal configure --enable-tests)
+  - (cd dbcleaner-hdbc && cabal build)
+  - (cd dbcleaner-hdbc && cabal test)
