@@ -12,4 +12,6 @@ across multiple database libraries:
 
 ## Supported Libraries
 
+* [HDBC-postgresql](http://hackage.haskell.org/package/HDBC-postgresql)
+* [HDBC-sqlite3](http://hackage.haskell.org/package/HDBC-sqlite3)
 * [postgresql-simple](https://github.com/lpsmith/postgresql-simple)
