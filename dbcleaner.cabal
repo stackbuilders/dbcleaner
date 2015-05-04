@@ -1,5 +1,5 @@
 name:           dbcleaner
-version:        0.1.0
+version:        0.1.1
 synopsis:       Clean database tables automatically around hspec tests
 description:    A simple database cleaner library for testing that provides
                 different cleanup strategies.
