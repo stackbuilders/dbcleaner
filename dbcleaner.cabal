@@ -1,7 +1,8 @@
 name:           dbcleaner
 version:        0.1.0
 synopsis:       Clean database tables automatically around hspec tests
--- description:    
+description:    A simple database cleaner library for testing that provides
+                different cleanup strategies.
 license:        MIT
 license-file:   LICENSE
 author:         Stack Builders

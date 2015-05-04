@@ -2,8 +2,7 @@
 
 [![Build Status](https://travis-ci.org/stackbuilders/dbcleaner.svg?branch=master)](https://travis-ci.org/stackbuilders/dbcleaner)
 
-A simple database cleaner library for testing that provides different cleanup strategies
-across multiple database libraries:
+A simple database cleaner library for testing that provides different cleanup strategies.
 
 ## Supported Strategies
 
@@ -12,4 +11,4 @@ across multiple database libraries:
 
 ## Supported Libraries
 
-* [postgresql-simple](https://github.com/lpsmith/postgresql-simple)
+* [postgresql-simple](https://hackage.haskell.org/package/postgresql-simple)
