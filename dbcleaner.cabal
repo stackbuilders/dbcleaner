@@ -1,6 +1,6 @@
-name:           dbcleaner-postgresql-simple
+name:           dbcleaner
 version:        0.1.0
--- synopsis:       
+synopsis:       Clean database tables automatically around hspec tests
 -- description:    
 license:        MIT
 license-file:   LICENSE
@@ -12,11 +12,9 @@ cabal-version:  >= 1.10
 
 library
   exposed-modules:     Database.DBCleaner.PostgreSQLSimple
-                     , Database.DBCleaner.PostgreSQLSimple.Types
+                     , Database.DBCleaner.Types
   build-depends:       base >=4.4 && <4.9
-                     , dbcleaner-core
                      , postgresql-simple
-                     , bytestring
                      , text
   hs-source-dirs:      src
   default-language:    Haskell2010
@@ -25,10 +23,7 @@ test-suite spec
   type:                exitcode-stdio-1.0
   build-depends:       base
                      , hspec
-                     , dbcleaner-core
                      , postgresql-simple
-                     , transformers
-                     , bytestring
                      , text
   hs-source-dirs:      src, test
   main-is:             Spec.hs
@@ -36,4 +31,4 @@ test-suite spec
 
 source-repository head
   type: git
-  location: https://github.com/stackbuilders/dbcleaner/tree/master/dbcleaner-postgresql-simple
+  location: https://github.com/stackbuilders/dbcleaner

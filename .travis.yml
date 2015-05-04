@@ -13,20 +13,14 @@ before_install:
 
 install:
   - travis_retry cabal update
-  - (cd dbcleaner-core && cabal sandbox init)
-  - (cd dbcleaner-core && travis_retry cabal install --only-dependencies --enable-tests)
-  - (cd dbcleaner-postgresql-simple && cabal sandbox init)
-  - (cd dbcleaner-postgresql-simple && cabal sandbox add-source ../dbcleaner-core)
-  - (cd dbcleaner-postgresql-simple && travis_retry cabal install --only-dependencies --enable-tests)
+  - cabal sandbox init
+  - travis_retry cabal install --only-dependencies --enable-tests
 
 before_script:
   - createdb dbcleaner
-  - psql dbcleaner < dbcleaner-postgresql-simple/test/schema.sql
+  - psql dbcleaner < test/schema.sql
 
 script:
-  - (cd dbcleaner-core && cabal configure --enable-tests)
-  - (cd dbcleaner-core && cabal build) 
-  - (cd dbcleaner-core && cabal test) 
-  - (cd dbcleaner-postgresql-simple && cabal configure --enable-tests)
-  - (cd dbcleaner-postgresql-simple && cabal build)
-  - (cd dbcleaner-postgresql-simple && cabal test)
+  - cabal configure --enable-tests
+  - cabal build
+  - cabal test
