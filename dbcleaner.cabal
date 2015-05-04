@@ -11,8 +11,8 @@ build-type:     Simple
 cabal-version:  >= 1.10
 
 library
-  -- exposed-modules:     Database.DBCleaner.PostgreSQLSimple
-  --                    , Database.DBCleaner.PostgreSQLSimple.Types
+  exposed-modules:     Database.DBCleaner.PostgreSQLSimple
+                     , Database.DBCleaner.Types
   build-depends:       base >=4.4 && <4.9
                      , postgresql-simple
                      , bytestring
