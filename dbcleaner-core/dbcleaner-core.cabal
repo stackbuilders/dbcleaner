@@ -1,7 +1,9 @@
 name:           dbcleaner-core
 version:        0.1.0
--- synopsis:
--- description:
+synopsis:       Define a generic connection interface to build adapters on top of it
+description:    Define a generic connection interface to build adapters on top of it.
+                The generic conneciton defined specify two cleanup strategies
+                Transaction and Truncation.
 license:        MIT
 license-file:   LICENSE
 author:         Stack Builders

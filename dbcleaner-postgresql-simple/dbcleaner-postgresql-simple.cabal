@@ -1,7 +1,7 @@
 name:           dbcleaner-postgresql-simple
 version:        0.1.0
--- synopsis:       
--- description:    
+synopsis:       dbcleaner adapter for postgresql-simple
+description:    dbcleaner adapter for postgresql-simple
 license:        MIT
 license-file:   LICENSE
 author:         Stack Builders
