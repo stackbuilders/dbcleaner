@@ -12,6 +12,7 @@ import           Database.PostgreSQL.Simple.Types (Identifier (..))
 
 import           Database.DBCleaner.Types         (Strategy (..))
 
+-- | Connection wrapper that cleans up the database using the strategy specified.
 withConnection :: Strategy -> (Connection -> IO a) -> Connection -> IO a
 withConnection Transaction f c = bracket (begin c >> return c) rollback f
 withConnection Truncation f c = finally (f c) $ listTables c >>= mapM_ (truncateTable c)
