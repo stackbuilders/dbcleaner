@@ -32,7 +32,7 @@ instance ToRow User where
                    ]
 
 withTestConnection :: Strategy -> (Connection -> IO a) -> IO a
-withTestConnection s f = connectPostgreSQL "" >>= withConnection s f
+withTestConnection s f = connectPostgreSQL "dbname=dbcleaner" >>= withConnection s f
 
 createUser :: Connection -> User -> IO ()
 createUser c = void . execute c "INSERT INTO users (name, email) VALUES (?, ?)"
