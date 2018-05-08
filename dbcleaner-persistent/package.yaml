@@ -28,6 +28,10 @@ library:
     - dbcleaner
     - exceptions
     - persistent
+    - persistent-sqlite
+    - monad-logger
+    - resourcet
+    - persistent-template
 
 tests:
   dbcleaner-persistent-test:

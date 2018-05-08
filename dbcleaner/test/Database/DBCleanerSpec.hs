@@ -7,7 +7,7 @@ import           Test.Hspec
 
 spec :: Spec
 spec =
-  describe "withStrategy" $ do
+  describe "withAdapter" $ do
     let adapter = Adapter
           { beginTransation     = tell ["begin"]
           , rollbackTransaction = tell ["rollback"]
@@ -18,16 +18,16 @@ spec =
     context "when the strategy is Transaction" $
       it "" $ do
         output <- execWriterT $
-          withStrategy adapter Transaction $ tell ["action"]
+          withAdapter adapter Transaction $ tell ["action"]
         output `shouldBe` ["begin", "action", "rollback"]
 
     context "when the strategy is Truncation" $ do
       it "" $ do
         output <- execWriterT $
-          withStrategy adapter (Truncation []) $ tell ["action"]
+          withAdapter adapter (Truncation []) $ tell ["action"]
         output `shouldBe` ["table1", "table2", "action"]
 
       it "" $ do
         output <- execWriterT $
-          withStrategy adapter (Truncation ["table1"]) $ tell ["action"]
+          withAdapter adapter (Truncation ["table1"]) $ tell ["action"]
         output `shouldBe` ["table2", "action"]

@@ -3,7 +3,7 @@
 module Database.DBCleaner
   ( Adapter(..)
   , Strategy(..)
-  , withStrategy
+  , withAdapter
   ) where
 
 import           Control.Monad.Catch
@@ -19,14 +19,14 @@ data Strategy
   = Transaction
   | Truncation [String]
 
-withStrategy
+withAdapter
   :: MonadMask m
   => Adapter m
   -> Strategy
   -> m a
   -> m a
-withStrategy c Transaction     = withTransaction c
-withStrategy c (Truncation ts) = withTruncation c ts
+withAdapter c Transaction     = withTransaction c
+withAdapter c (Truncation ts) = withTruncation c ts
 
 withTransaction
   :: MonadMask m
