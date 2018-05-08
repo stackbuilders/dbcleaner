@@ -1,0 +1,18 @@
+name:    dbcleaner
+version: 0.1.3
+
+dependencies:
+  - base >= 4.7 && < 5
+  - exceptions
+
+library:
+  source-dirs: src
+
+tests:
+  hspec:
+    main:        Spec.hs
+    source-dirs: test
+    dependencies:
+      - dbcleaner
+      - hspec
+      - mtl
