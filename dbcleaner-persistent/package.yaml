@@ -35,11 +35,19 @@ library:
 
 tests:
   dbcleaner-persistent-test:
-    main:                Spec.hs
     source-dirs:         test
+    main:                Spec.hs
+    other-modules:
+      - Database.DBCleaner.PersistentSpec
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
     - dbcleaner-persistent
+    - hspec
+    - monad-logger
+    - persistent
+    - persistent-template
+    - persistent-sqlite
+    - resourcet

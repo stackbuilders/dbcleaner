@@ -10,6 +10,7 @@ module Database.DBCleaner.PersistentSpec where
 
 import           Control.Monad.Logger
 import           Control.Monad.Trans.Resource
+import           Data.List (length)
 import           Database.DBCleaner.Persistent
 import           Database.Persist.Sqlite
 import           Database.Persist.TH
@@ -28,12 +29,10 @@ spec = do
       it "" $ do
         countUsers <- withDB $ withStrategy Transaction $ do
           runMigration migrateAll
+          insert $ User "Napoleon" "Dynamite"
+          selectList [] [Asc UserFirstName]
 
-          undefined
-
-
-        countUsers `shouldBe` 0
+        length countUsers `shouldBe` 0
 
 withDB :: SqlPersistT (NoLoggingT (ResourceT IO)) a -> IO a
 withDB = runSqlite ":memory:"
-
