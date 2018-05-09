@@ -30,9 +30,9 @@ spec = do
         countUsers <- withDB $ withStrategy Transaction $ do
           runMigration migrateAll
           insert $ User "Napoleon" "Dynamite"
-          selectList [] [Asc UserFirstName]
+          count ([] :: [Filter User])
 
-        length countUsers `shouldBe` 0
+        countUsers `shouldBe` 0
 
 withDB :: SqlPersistT (NoLoggingT (ResourceT IO)) a -> IO a
 withDB = runSqlite ":memory:"
