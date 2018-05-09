@@ -10,7 +10,7 @@ import           Database.DBCleaner
 import           Database.PostgreSQL.Simple
 
 withStrategy
-  :: MonadMask m
+  :: (MonadIO m, MonadMask m)
   => Strategy
   -> ReaderT Connection m a
   -> ReaderT Connection m a
@@ -21,5 +21,10 @@ withStrategy = withAdapter Adapter
   , truncateTables      = undefined
   }
 
-liftPS :: (Connection -> IO a) -> ReaderT Connection m a
-liftPS = undefined
+liftPS
+  :: MonadIO m
+  => (Connection -> IO a)
+  -> ReaderT Connection m a
+liftPS f = do
+  c <- ask
+  liftIO $ f c
