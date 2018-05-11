@@ -20,23 +20,24 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/sestrella/dbcleaner-postgresql-simple#readme>
 
 dependencies:
-- base >= 4.7 && < 5
+  - base >= 4.7 && < 5
+  - mtl
+  - postgresql-simple
 
 library:
   source-dirs: src
   dependencies:
     - dbcleaner
     - exceptions
-    - mtl
-    - postgresql-simple
 
 tests:
   dbcleaner-postgresql-simple-test:
-    main:                Spec.hs
-    source-dirs:         test
+    main:         Spec.hs
+    source-dirs:  test
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - dbcleaner-postgresql-simple
+      - dbcleaner-postgresql-simple
+      - hspec

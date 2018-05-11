@@ -25,13 +25,13 @@ spec =
   describe "withStrategy" $ do
     context "when the strategy is Transaction" $
       it "" $ do
-        withDB $ withStrategy Transaction $ do
-          c <- ask
-          undefined $ execute "" ()
+        (countBefore, countAfter) <- withDB $ do
+          countBefore <- countUsers
+          withStrategy Transaction $ createUser $ User "John" "Doe"
+          countAfter <- countUsers
+          return (countBefore, countAfter)
 
-          undefined
-
-        pending
+        countBefore `shouldBe` countAfter
 
     context "when the strategy is Truncation" $
       it "" $
@@ -40,3 +40,16 @@ spec =
 
 withDB :: ReaderT Connection IO a -> IO a
 withDB = bracket (connectPostgreSQL "dbname=dbcleaner") close . runReaderT
+
+countUsers :: ReaderT Connection IO Int
+countUsers = do
+  c <- ask
+  toCount <$> liftIO (query_ c "SELECT count(1) FROM users")
+  where
+    toCount []               = 0
+    toCount (Only count : _) = count
+
+createUser :: User -> ReaderT Connection IO ()
+createUser user = do
+  c <- ask
+  void $ liftIO $ execute c "INSERT INTO users (first_name, last_name) VALUES (?, ?)" user
