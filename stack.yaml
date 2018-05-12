@@ -2,6 +2,6 @@
 resolver: lts-11.8
 
 packages:
-  - dbcleaner-persistent
+  - dbcleaner-persistent-postgresql
   - dbcleaner-postgresql-simple
   - dbcleaner
