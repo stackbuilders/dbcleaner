@@ -6,13 +6,15 @@ module Database.DBCleaner
   , withAdapter
   ) where
 
+import           Control.Monad
 import           Control.Monad.Catch
+import           Debug.Trace
 
 data Adapter m = Adapter
-  { beginTransation     :: m ()
-  , rollbackTransaction :: m ()
-  , listTables          :: m [String]
-  , truncateTables      :: [String] -> m ()
+  { adapterBeginTransaction    :: m ()
+  , adapterRollbackTransaction :: m ()
+  , adapterListTables          :: m [String]
+  , adapterTruncateTables      :: [String] -> m ()
   }
 
 data Strategy
@@ -33,7 +35,8 @@ withTransaction
   => Adapter m
   -> m a
   -> m a
-withTransaction Adapter{..} = bracket_ beginTransation rollbackTransaction
+withTransaction Adapter{..} =
+  bracket_ adapterBeginTransaction adapterRollbackTransaction
 
 withTruncation
   :: Monad m
@@ -42,5 +45,6 @@ withTruncation
   -> m a
   -> m a
 withTruncation Adapter{..} ts f = do
-  listTables >>= truncateTables . filter (`notElem` ts)
+  tables <- filter (`notElem` ts) <$> adapterListTables
+  unless (null tables) $ adapterTruncateTables tables
   f

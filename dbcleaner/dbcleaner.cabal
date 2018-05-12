@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9049d162fb813b4c8b7aff63c7acac67fd697971da75684d3e444b134ab44cc4
+-- hash: d75696ff366886303c5717e3fd047abc3bdd66b8b44a79c5ce8638dd335cb061
 
 name:           dbcleaner
 version:        0.1.3
@@ -22,7 +22,7 @@ library
     , exceptions
   default-language: Haskell2010
 
-test-suite hspec
+test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:

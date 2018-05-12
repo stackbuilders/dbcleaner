@@ -1,26 +1,10 @@
-name:                dbcleaner-postgresql-simple
-version:             0.1.0.0
-github:              "sestrella/dbcleaner-postgresql-simple"
-license:             BSD3
-author:              "Sebastián Estrella"
-maintainer:          "sebas007estrella@gmail.com"
-copyright:           "2018 Sebastián Estrella"
-
-extra-source-files:
-- README.md
-- ChangeLog.md
-
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
-
-# To avoid duplicated efforts in documentation and dealing with the
-# complications of embedding Haddock markup inside cabal files, it is
-# common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/sestrella/dbcleaner-postgresql-simple#readme>
+---
+name:     dbcleaner-postgresql-simple
+version:  0.1.3
 
 dependencies:
   - base >= 4.7 && < 5
+  - exceptions
   - mtl
   - postgresql-simple
 
@@ -28,10 +12,9 @@ library:
   source-dirs: src
   dependencies:
     - dbcleaner
-    - exceptions
 
 tests:
-  dbcleaner-postgresql-simple-test:
+  spec:
     main:         Spec.hs
     source-dirs:  test
     ghc-options:
