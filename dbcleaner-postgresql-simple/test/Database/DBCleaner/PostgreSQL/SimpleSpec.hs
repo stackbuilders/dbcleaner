@@ -80,7 +80,7 @@ createTableUsers :: ReaderT Connection IO ()
 createTableUsers = do
   c <- ask
   void $ liftIO $ execute_ c $ mconcat
-    [ "CREATE TABLE users ("
+    [ "CREATE TABLE  public.users ("
     , "  id serial PRIMARY KEY,"
     , "  first_name varchar NOT NULL,"
     , "  last_name varchar NOT NULL"

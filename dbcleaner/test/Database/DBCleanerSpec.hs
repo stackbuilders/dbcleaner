@@ -26,10 +26,10 @@ spec =
         it "truncates all tables except the ones excluded" $ do
           output <- execWriterT $
             withAdapter adapter (Truncation ["table1"]) $ tell ["action"]
-          output `shouldBe` ["table2", "action"]
+          output `shouldBe` ["table2", "action", "table2"]
 
       context "and there are no tables excluded" $
         it "truncates all tables" $ do
           output <- execWriterT $
             withAdapter adapter (Truncation []) $ tell ["action"]
-          output `shouldBe` ["table1", "table2", "action"]
+          output `shouldBe` ["table1", "table2", "action", "table1", "table2"]

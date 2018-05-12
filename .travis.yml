@@ -1,26 +1,11 @@
-env:
-  - GHC_VERSION=7.6.3  CABAL_VERSION=1.18
-  - GHC_VERSION=7.8.4  CABAL_VERSION=1.20
-  - GHC_VERSION=7.10.1 CABAL_VERSION=1.22
-  - GHC_VERSION=8.0.2  CABAL_VERSION=1.24
-  - GHC_VERSION=8.2.1  CABAL_VERSION=1.24
+---
+language: haskell
 
-before_install:
-  - travis_retry sudo apt-add-repository -y ppa:hvr/ghc
-  - travis_retry sudo apt-get update
-  - travis_retry sudo apt-get install -y ghc-$GHC_VERSION cabal-install-$CABAL_VERSION
-  - export PATH=/opt/ghc/$GHC_VERSION/bin:/opt/cabal/$CABAL_VERSION/bin:$PATH
+ghc:
+  - "8.2"
 
-install:
-  - travis_retry cabal update
-  - cabal sandbox init
-  - travis_retry cabal install --only-dependencies --enable-tests
+services:
+  - postgresql
 
 before_script:
   - createdb dbcleaner
-  - psql dbcleaner < test/schema.sql
-
-script:
-  - cabal configure --enable-tests
-  - cabal build
-  - cabal test

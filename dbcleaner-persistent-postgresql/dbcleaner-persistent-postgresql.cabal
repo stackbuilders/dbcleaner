@@ -1,0 +1,46 @@
+-- This file has been generated from package.yaml by hpack version 0.27.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: c26fd4cdfb2054c58e003dab7a34abf1260355615a307cbbcda04d82bb6e624d
+
+name:           dbcleaner-persistent-postgresql
+version:        0.1.3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      Database.DBCleaner.Persistent.PostgreSQL
+  other-modules:
+      Paths_dbcleaner_persistent_postgresql
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , dbcleaner
+    , exceptions
+    , persistent
+    , text
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Database.DBCleaner.Persistent.PostgreSQLSpec
+      Paths_dbcleaner_persistent_postgresql
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , dbcleaner-persistent-postgresql
+    , exceptions
+    , hspec
+    , monad-logger
+    , persistent
+    , persistent-postgresql
+    , persistent-template
+  default-language: Haskell2010

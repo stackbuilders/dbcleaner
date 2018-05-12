@@ -13,7 +13,6 @@ module Database.DBCleaner.Persistent.PostgreSQLSpec
 import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
-import           Control.Monad.IO.Class
 import           Control.Monad.Logger
 import           Database.DBCleaner.Persistent.PostgreSQL
 import           Database.Persist.Postgresql

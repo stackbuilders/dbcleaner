@@ -39,12 +39,14 @@ withTransaction Adapter{..} =
   bracket_ adapterBeginTransaction adapterRollbackTransaction
 
 withTruncation
-  :: Monad m
+  :: MonadMask m
   => Adapter m
   -> [String]
   -> m a
   -> m a
 withTruncation Adapter{..} ts f = do
   tables <- filter (`notElem` ts) <$> adapterListTables
-  unless (null tables) $ adapterTruncateTables tables
-  f
+  truncateTables tables
+  f `finally` truncateTables tables
+  where
+    truncateTables tables = unless (null tables) $ adapterTruncateTables tables

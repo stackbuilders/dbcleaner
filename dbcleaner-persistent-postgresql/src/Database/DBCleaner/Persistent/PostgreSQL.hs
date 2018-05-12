@@ -7,6 +7,7 @@ module Database.DBCleaner.Persistent.PostgreSQL
 
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
+import qualified Data.Text              as T
 import           Database.DBCleaner
 import           Database.Persist.Sql
 
@@ -25,7 +26,13 @@ withStrategy = withAdapter Adapter
 listTables :: MonadIO m => SqlPersistT m [String]
 listTables = fmap unSingle <$> rawSql q []
   where
-    q = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
+    q = "SELECT table_schema || '.' || table_name FROM information_schema.tables WHERE table_schema = 'public'"
 
 truncateTables :: MonadIO m => [String] -> SqlPersistT m ()
-truncateTables = undefined
+truncateTables ts = rawExecute (mconcat q) []
+  where
+    q =
+      [ "TRUNCATE TABLE "
+      , T.intercalate ", " $ fmap T.pack ts
+      , " CASCADE"
+      ]
