@@ -27,7 +27,7 @@ User sql=users
 |]
 
 spec :: Spec
-spec = beforeAll (withDB createTableUsers) $ afterAll_ (withDB dropTableUsers) $ do
+spec = withUsersTable $
   describe "withStrategy" $ do
     context "when the strategy is Transaction" $ do
       context "and there is an error during the operation" $
@@ -54,15 +54,32 @@ spec = beforeAll (withDB createTableUsers) $ afterAll_ (withDB dropTableUsers) $
           countBefore `shouldBe` countAfter
 
     context "when the strategy is Truncation" $ do
-      it "truncates all tables" $ do
-        (countBefore, countAfter) <- withDB $ do
-          countBefore <- countUsers
-          withStrategy (Truncation []) $ insert_ $ User "John" "Doe"
-          countAfter <- countUsers
-          return (countBefore, countAfter)
+      context "and there is an error during the operation" $
+        it "truncates all tables" $ do
+          (countBefore, countAfter) <- withDB $ do
+            countBefore <- countUsers
+            withStrategy (Truncation []) $ insert_ $ User "John" "Doe"
+            countAfter <- countUsers
+            return (countBefore, countAfter)
 
-        countBefore `shouldBe` countAfter
+          countBefore `shouldBe` countAfter
 
+      context "and there is no error during the operation" $
+        it "truncates all tables" $ do
+          (countBefore, countAfter) <- withDB $ do
+            countBefore <- countUsers
+            countAfter <- handleAll (const countUsers) $
+              withStrategy (Truncation []) $ do
+                insert_ $ User "John" "Doe"
+                fail "Boom!"
+
+            return (countBefore, countAfter)
+
+          countBefore `shouldBe` countAfter
+
+withUsersTable :: SpecWith () -> Spec
+withUsersTable =
+  beforeAll (withDB createTableUsers) . afterAll_ (withDB dropTableUsers)
 
 withDB :: SqlPersistT (NoLoggingT IO) a -> IO a
 withDB = runNoLoggingT . withPostgresqlConn "dbname=dbcleaner" . runSqlConn

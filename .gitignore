@@ -1,17 +1,2 @@
-*.aux
-*.chi
-*.chs.h
-*.dyn_hi
-*.dyn_o
-*.hi
-*.hp
-*.o
-*.prof
-.cabal-sandbox/
-.hpc
-.hsenv
 .stack-work/
-cabal-dev
-cabal.sandbox.config
-dist
 tags

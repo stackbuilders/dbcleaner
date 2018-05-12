@@ -22,7 +22,7 @@ data User = User
 instance ToRow User
 
 spec :: Spec
-spec = beforeAll (withDB createTableUsers) $ afterAll_ (withDB dropTableUsers) $
+spec = withUsersTable $
   describe "withStrategy" $ do
     context "when the strategy is Transaction" $ do
       context "and there is an error during the operation" $
@@ -72,6 +72,9 @@ spec = beforeAll (withDB createTableUsers) $ afterAll_ (withDB dropTableUsers) $
 
           countBefore `shouldBe` countAfter
 
+withUsersTable :: SpecWith () -> Spec
+withUsersTable =
+  beforeAll (withDB createTableUsers) . afterAll_ (withDB dropTableUsers)
 
 withDB :: ReaderT Connection IO a -> IO a
 withDB = bracket (connectPostgreSQL "dbname=dbcleaner") close . runReaderT
