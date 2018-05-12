@@ -1,18 +1,21 @@
 ---
 language: haskell
 
-ghc:
-  - "8.2"
-
 services:
   - postgresql
 
-install:
-  - cd dbcleaner-persistent-postgresql
-  - cabal install --only-dependencies --enable-tests
+ghc:
+  - "8.2"
 
-script:
-  - cd dbcleaner-persistent-postgresql
-  - cabal configure --enable-tests
-  - cabal build
-  - cabal test
+env:
+  - PACKAGEDIR="dbcleaner-persistent-postgresql"
+
+addons:
+  apt:
+    sources:
+      - hvr-ghc
+    packages:
+      - happy-1.19.5
+
+before_install:
+  - cd $PACKAGEDIR
