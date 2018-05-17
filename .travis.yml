@@ -5,14 +5,18 @@ services:
   - postgresql
 
 ghc:
+  - "8.4"
   - "8.2"
   - "8.0"
+  - "7.10"
+  - "7.8"
 
 env:
   global:
-    - PATH=/opt/happy/1.19.5/bin:$PATH
+    - PATH="/opt/happy/1.19.5/bin:$PATH"
   matrix:
     - PACKAGEDIR="dbcleaner-persistent-postgresql"
+    - PACKAGEDIR="dbcleaner-postgresql-simple"
 
 addons:
   apt:
