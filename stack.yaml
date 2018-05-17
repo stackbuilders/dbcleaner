@@ -1,11 +1,7 @@
 ---
-resolver: lts-9.0
+resolver: lts-11.8
 
 packages:
-  - '.'
-
-extra-deps: []
-
-flags: {}
-
-extra-package-dbs: []
+  - dbcleaner-persistent-postgresql
+  - dbcleaner-postgresql-simple
+  - dbcleaner

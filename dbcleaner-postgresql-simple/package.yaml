@@ -1,0 +1,26 @@
+---
+name:     dbcleaner-postgresql-simple
+version:  1.0.0
+
+dependencies:
+  - base >= 4.7 && < 5
+  - exceptions
+  - mtl
+  - postgresql-simple
+
+library:
+  source-dirs: src
+  dependencies:
+    - dbcleaner >= 1.0 && < 2.0
+
+tests:
+  spec:
+    main:         Spec.hs
+    source-dirs:  test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - dbcleaner-postgresql-simple
+      - hspec

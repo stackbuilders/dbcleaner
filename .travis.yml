@@ -1,26 +1,32 @@
+---
+language: haskell
+
+services:
+  - postgresql
+
+ghc:
+  - "8.4"
+  - "8.2"
+  - "8.0"
+  - "7.10"
+  - "7.8"
+
 env:
-  - GHC_VERSION=7.6.3  CABAL_VERSION=1.18
-  - GHC_VERSION=7.8.4  CABAL_VERSION=1.20
-  - GHC_VERSION=7.10.1 CABAL_VERSION=1.22
-  - GHC_VERSION=8.0.2  CABAL_VERSION=1.24
-  - GHC_VERSION=8.2.1  CABAL_VERSION=1.24
+  global:
+    - PATH="/opt/happy/1.19.5/bin:$PATH"
+  matrix:
+    - PACKAGEDIR="dbcleaner-persistent-postgresql"
+    - PACKAGEDIR="dbcleaner-postgresql-simple"
+
+addons:
+  apt:
+    packages:
+      - happy-1.19.5
 
 before_install:
-  - travis_retry sudo apt-add-repository -y ppa:hvr/ghc
-  - travis_retry sudo apt-get update
-  - travis_retry sudo apt-get install -y ghc-$GHC_VERSION cabal-install-$CABAL_VERSION
-  - export PATH=/opt/ghc/$GHC_VERSION/bin:/opt/cabal/$CABAL_VERSION/bin:$PATH
-
-install:
-  - travis_retry cabal update
+  - cd $PACKAGEDIR
   - cabal sandbox init
-  - travis_retry cabal install --only-dependencies --enable-tests
+  - cabal sandbox add-source ../dbcleaner
 
 before_script:
   - createdb dbcleaner
-  - psql dbcleaner < test/schema.sql
-
-script:
-  - cabal configure --enable-tests
-  - cabal build
-  - cabal test

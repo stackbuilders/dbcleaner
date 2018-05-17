@@ -1,0 +1,39 @@
+-- This file has been generated from package.yaml by hpack version 0.27.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 62c3393655066a665fbc7008d3bed2d2b59fbf1e9dc25e8546d3683b96c40ada
+
+name:           dbcleaner
+version:        1.0.0
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      Database.DBCleaner
+  other-modules:
+      Paths_dbcleaner
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , exceptions
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Database.DBCleanerSpec
+      Paths_dbcleaner
+  hs-source-dirs:
+      test
+  build-depends:
+      base >=4.7 && <5
+    , dbcleaner
+    , exceptions
+    , hspec
+    , mtl
+  default-language: Haskell2010

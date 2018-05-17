@@ -1,0 +1,29 @@
+---
+name:     dbcleaner-persistent-postgresql
+version:  1.0.0
+
+dependencies:
+  - base >= 4.7 && < 5
+  - exceptions
+  - persistent
+
+library:
+  source-dirs: src
+  dependencies:
+    - dbcleaner >= 1.0 && < 2.0
+    - text
+
+tests:
+  spec:
+    main:         Spec.hs
+    source-dirs:  test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - dbcleaner-persistent-postgresql
+      - hspec
+      - monad-logger
+      - persistent-postgresql
+      - persistent-template
