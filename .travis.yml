@@ -6,6 +6,7 @@ services:
 
 ghc:
   - "8.2"
+  - "8.0"
 
 env:
   global:
@@ -22,3 +23,6 @@ before_install:
   - cd $PACKAGEDIR
   - cabal sandbox init
   - cabal sandbox add-source ../dbcleaner
+
+before_script:
+  - createdb dbcleaner
