@@ -19,3 +19,5 @@ addons:
 
 before_install:
   - cd $PACKAGEDIR
+  - cabal sandbox init
+  - cabal sandbox add-source ../dbcleaner

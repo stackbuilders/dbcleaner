@@ -2,10 +2,10 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d75696ff366886303c5717e3fd047abc3bdd66b8b44a79c5ce8638dd335cb061
+-- hash: 62c3393655066a665fbc7008d3bed2d2b59fbf1e9dc25e8546d3683b96c40ada
 
 name:           dbcleaner
-version:        0.1.3
+version:        1.0.0
 license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
