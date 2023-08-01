@@ -1,10 +1,10 @@
+[![Build Status](https://travis-ci.org/stackbuilders/dbcleaner.svg?branch=master)](https://travis-ci.org/stackbuilders/dbcleaner)
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 > **⚠️ Warning:** This library has been deprecated and is no longer maintained. It will not receive any further security patches, features, or bug fixes and is preserved here at GitHub for archival purposes. If you want to use it, we suggest forking the repository and auditing the codebase before use. For more information, contact us at info@stackbuilders.com.
 
-# DB Cleaner
+# DEPRECATED - DB Cleaner
 
-[![Build Status](https://travis-ci.org/stackbuilders/dbcleaner.svg?branch=master)](https://travis-ci.org/stackbuilders/dbcleaner)
 
 A simple database cleaner library for testing that provides different cleanup strategies.
 
